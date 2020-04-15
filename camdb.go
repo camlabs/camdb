@@ -1,6 +1,6 @@
 package camdb
 
-import "time"
+//import "time"
 
 // Tx .
 type Tx struct {
@@ -11,7 +11,7 @@ type Tx struct {
 	Asset      string    `xorm:"notnull"`
 	Value      string    `xorm:"notnull"`
 	Block      uint64    `xorm:"notnull index"`
-	CreateTime time.Time `xorm:"TIMESTAMP notnull"`
+	CreateTime int64     `xorm:"notnull"`
 }
 
 // TableName .
@@ -25,7 +25,7 @@ type Block struct {
 	Block      int64     `xorm:"notnull index"`
 	SysFee     float64   `xorm:"notnull"`
 	NetFee     float64   `xorm:"notnull"`
-	CreateTime time.Time `xorm:"TIMESTAMP notnull"`
+	CreateTime int64     `xorm:"notnull"`
 }
 
 // TableName .
@@ -43,8 +43,8 @@ type UTXO struct {
 	SpentBlock  int64      `xorm:"notnull index default (-1)"`
 	Asset       string     `xorm:"notnull index(unclaimed)"`
 	Value       string     `xorm:"notnull"`
-	CreateTime  time.Time  `xorm:"TIMESTAMP notnull"`
-	SpentTime   *time.Time `xorm:"TIMESTAMP"`
+	CreateTime  int64      `xorm:"notnull"`
+	SpentTime   int64      `xorm:"TIMESTAMP"`
 	Claimed     bool       `xorm:"index(unclaimed)"`
 }
 
@@ -62,9 +62,9 @@ type Order struct {
 	Asset       string     `json:"asset" xorm:"notnull"`
 	Value       string     `json:"value" xorm:"notnull"`
 	Block       int64      `json:"blocks" xorm:"default (-1)"`
-	CreateTime  time.Time  `json:"createTime,omitempty" xorm:"TIMESTAMP notnull created"`
-	ConfirmTime *time.Time `json:"confirmTime,omitempty" xorm:"TIMESTAMP"`
-	Context     *string    `json:"context" xorm:"TEXT"`
+	CreateTime  int64      `json:"createTime" xorm:"notnull"`
+	ConfirmTime int64      `json:"confirmTime" xorm:"notnull"`
+	Status      int64      `json:"status" xorm:"default (1)"`
 }
 
 // TableName xorm table name
@@ -76,8 +76,7 @@ func (table *Order) TableName() string {
 type Wallet struct {
 	ID         int64     `xorm:"pk autoincr"`
 	Address    string    `xorm:"index(address_userid)"`
-	UserID     string    `xorm:"index(address_userid)"`
-	CreateTime time.Time `xorm:"TIMESTAMP notnull created"`
+	CreateTime int64     `xorm:"notnull"`
 }
 
 // TableName xorm table name

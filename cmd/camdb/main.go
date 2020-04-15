@@ -7,7 +7,7 @@ import (
 	"github.com/dynamicgo/config"
 	"github.com/dynamicgo/slf4go"
 	"github.com/go-xorm/xorm"
-	"github.com/inwecrypto/camdb"
+	"github.com/camlabs/camdb"
 	_ "github.com/lib/pq"
 )
 
