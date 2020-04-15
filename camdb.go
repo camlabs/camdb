@@ -4,15 +4,15 @@ package camdb
 
 // Tx .
 type Tx struct {
-	ID         int64     `xorm:"pk autoincr"`
+	ID         int     `xorm:"pk autoincr"`
 	TX         string    `xorm:"'t_x' notnull index(t_x_from_to_asset)"`
 	From       string    `xorm:"'from' notnull index(t_x_from_to_asset)"`
 	To         string    `xorm:"'to' notnull index(t_x_from_to_asset)"`
 	Asset      string    `xorm:"'asset' notnull index(t_x_from_to_asset)"`
 	Value      string    `xorm:"'value' notnull"`
 	Block      uint64    `xorm:"'block' notnull"`
-	CreateTime int64     `xorm:"'create_time' notnull"`
-	TxIndex    int64     `xorm:"'tx_index' notnull default (0)"`
+	CreateTime int     `xorm:"'create_time' notnull"`
+	TxIndex    int     `xorm:"'tx_index' notnull default (0)"`
 }
 
 // TableName .
@@ -22,11 +22,11 @@ func (tx *Tx) TableName() string {
 
 // Block .
 type Block struct {
-	ID         int64     `xorm:"pk autoincr"`
+	ID         int     `xorm:"pk autoincr"`
 	Block      int64     `xorm:"'block' notnull index(block_index)"`
-	SysFee     float64   `xorm:"'sys_fee' notnull"`
-	NetFee     float64   `xorm:"'net_fee' notnull"`
-	CreateTime int64     `xorm:"'create_time' notnull"`
+	SysFee     float32   `xorm:"'sys_fee' notnull"`
+	NetFee     float32   `xorm:"'net_fee' notnull"`
+	CreateTime int     `xorm:"'create_time' notnull"`
 }
 
 // TableName .
@@ -36,7 +36,7 @@ func (tx *Block) TableName() string {
 
 // UTXO .
 type UTXO struct {
-	ID          int64      `xorm:"pk autoincr"`
+	ID          int      `xorm:"pk autoincr"`
 	TX          string     `xorm:"'t_x' notnull index(t_x_n)"`
 	N           int        `xorm:"'n' notnull index(t_x_n)"`
 	Address     string     `xorm:"'address' notnull"`
@@ -44,8 +44,8 @@ type UTXO struct {
 	SpentBlock  int64      `xorm:"'spent_block' default (-1)"`
 	Asset       string     `xorm:"'asset' notnull"`
 	Value       string     `xorm:"'value' notnull"`
-	CreateTime  int64      `xorm:"'create_time' notnull"`
-	SpentTime   int64      `xorm:"'spent_time' null"`
+	CreateTime  int      `xorm:"'create_time' notnull"`
+	SpentTime   int      `xorm:"'spent_time' null"`
 	Claimed     bool       `xorm:"'claimed' notnull"`
 }
 
@@ -56,17 +56,17 @@ func (table *UTXO) TableName() string {
 
 // Order .
 type Order struct {
-	ID          int64      `xorm:"pk autoincr"`
+	ID          int      `xorm:"pk autoincr"`
 	TX          string     `xorm:"'t_x' index(t_x_from_to_asset) notnull"`
 	From        string     `xorm:"'from' index(t_x_from_to_asset)"`
 	To          string     `xorm:"'to' index(t_x_from_to_asset)"`
 	Asset       string     `xorm:"'asset' index(t_x_from_to_asset) notnull"`
 	Value       string     `xorm:"'value' notnull"`
 	Block       int64      `xorm:"'block' default (-1)"`
-	CreateTime  int64      `xorm:"'create_time'"`
-	ConfirmTime int64      `xorm:"'confirm_time'"`
-	Status      int64      `xorm:"'status' notnull default (1)"`
-	TxIndex     int64      `xorm:"'tx_index' notnull default (0)"`
+	CreateTime  int      `xorm:"'create_time'"`
+	ConfirmTime int      `xorm:"'confirm_time'"`
+	Status      int      `xorm:"'status' notnull default (1)"`
+	TxIndex     int      `xorm:"'tx_index' notnull default (0)"`
 }
 
 // TableName xorm table name
@@ -76,9 +76,9 @@ func (table *Order) TableName() string {
 
 // Wallet .
 type Wallet struct {
-	ID         int64     `xorm:"pk autoincr"`
+	ID         int     `xorm:"pk autoincr"`
 	Address    string    `xorm:"'address' index(address)"`
-	CreateTime int64     `xorm:"'create_time' notnull"`
+	CreateTime int     `xorm:"'create_time' notnull"`
 }
 
 // TableName xorm table name
