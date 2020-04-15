@@ -24,8 +24,8 @@ func (tx *Tx) TableName() string {
 type Block struct {
 	ID         int     `xorm:"pk autoincr"`
 	Block      int64     `xorm:"'block' notnull index(block_index)"`
-	SysFee     float32   `xorm:"'sys_fee' notnull"`
-	NetFee     float32   `xorm:"'net_fee' notnull"`
+	SysFee     float64   `xorm:"'sys_fee' notnull"`
+	NetFee     float64   `xorm:"'net_fee' notnull"`
 	CreateTime int     `xorm:"'create_time' notnull"`
 }
 
@@ -57,12 +57,12 @@ func (table *UTXO) TableName() string {
 // Order .
 type Order struct {
 	ID          int      `xorm:"pk autoincr"`
-	TX          string     `xorm:"'t_x' index(t_x_from_to_asset) notnull"`
-	From        string     `xorm:"'from' index(t_x_from_to_asset)"`
-	To          string     `xorm:"'to' index(t_x_from_to_asset)"`
-	Asset       string     `xorm:"'asset' index(t_x_from_to_asset) notnull"`
-	Value       string     `xorm:"'value' notnull"`
-	Block       int64      `xorm:"'block' default (-1)"`
+	TX          string   `xorm:"'t_x' index(t_x_from_to_asset) notnull"`
+	From        string   `xorm:"'from' index(t_x_from_to_asset)"`
+	To          string   `xorm:"'to' index(t_x_from_to_asset)"`
+	Asset       string   `xorm:"'asset' index(t_x_from_to_asset) notnull"`
+	Value       string   `xorm:"'value' notnull"`
+	Block       int64    `xorm:"'block' default (-1)"`
 	CreateTime  int      `xorm:"'create_time'"`
 	ConfirmTime int      `xorm:"'confirm_time'"`
 	Status      int      `xorm:"'status' notnull default (1)"`
@@ -77,7 +77,7 @@ func (table *Order) TableName() string {
 // Wallet .
 type Wallet struct {
 	ID         int     `xorm:"pk autoincr"`
-	Address    string    `xorm:"'address' index(address)"`
+	Address    string  `xorm:"'address' index(address)"`
 	CreateTime int     `xorm:"'create_time' notnull"`
 }
 
